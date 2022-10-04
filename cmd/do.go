@@ -6,6 +6,7 @@ package cmd
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/spf13/cobra"
 )
@@ -22,6 +23,20 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("do called")
+		// fmt.Println(args)
+		// i, err := strconv.Atoi(args[0])
+		var task_ids []int
+		// fmt.Println(i, err)
+		for _, value := range args {
+			i, err := strconv.Atoi(value)
+			if err != nil {
+				fmt.Println("Could not do task with id:", value)
+				fmt.Println("error: ", err)
+			} else {
+				task_ids = append(task_ids, i)
+			}
+		}
+		fmt.Println(task_ids)
 	},
 }
 
