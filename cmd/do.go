@@ -7,6 +7,7 @@ package cmd
 import (
 	"fmt"
 	"strconv"
+	"task/db"
 
 	"github.com/spf13/cobra"
 )
@@ -23,10 +24,7 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("do called")
-		// fmt.Println(args)
-		// i, err := strconv.Atoi(args[0])
 		var task_ids []int
-		// fmt.Println(i, err)
 		for _, value := range args {
 			i, err := strconv.Atoi(value)
 			if err != nil {
@@ -37,6 +35,13 @@ to quickly create a Cobra application.`,
 			}
 		}
 		fmt.Println(task_ids)
+		for _, task_id := range task_ids {
+			err := db.DeleteTask(task_id)
+			if err != nil {
+				fmt.Println("Could delete task with id:", task_id)
+				fmt.Println("error: ", err.Error())
+			}
+		}
 	},
 }
 
