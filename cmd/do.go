@@ -1,7 +1,3 @@
-/*
-Copyright © 2022 NAME HERE <EMAIL ADDRESS>
-
-*/
 package cmd
 
 import (
@@ -16,20 +12,16 @@ import (
 // doCmd represents the do command
 var doCmd = &cobra.Command{
 	Use:   "do",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Crosses tasks off your list specified by their id",
+	// 	Long: `A longer description that spans multiple lines and likely contains examples
+	// and usage of using your command`,
 	Run: func(cmd *cobra.Command, args []string) {
 		var tasks_index []int
 		for _, value := range args {
 			i, err := strconv.Atoi(value)
 			if err != nil {
 				fmt.Println("Could not do task")
-				fmt.Println("error: ", err.Error())
+				fmt.Println("error: ", err)
 			} else {
 				tasks_index = append(tasks_index, i)
 			}
@@ -50,7 +42,7 @@ to quickly create a Cobra application.`,
 			err := db.DeleteTask(task_id)
 			if err != nil {
 				fmt.Println("Could not delete task with id:", task_id)
-				fmt.Println("error: ", err.Error())
+				fmt.Println("error: ", err)
 			}
 		}
 	},

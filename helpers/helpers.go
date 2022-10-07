@@ -8,7 +8,7 @@ import (
 func Must(err error, msg string) {
 	if err != nil {
 		fmt.Println(msg)
-		fmt.Println(err.Error())
+		fmt.Println("Error: ", err)
 		os.Exit(1)
 	}
 }
