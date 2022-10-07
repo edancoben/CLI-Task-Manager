@@ -1,6 +1,7 @@
 # CLI-Task-Manager
 
-A simple task manager built in GO
+A simple CLI task manager built in GO with the cobra cli framework and `bolt db` backend
+
 
 Usage:
   task [command]
