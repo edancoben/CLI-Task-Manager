@@ -6,9 +6,9 @@ package cmd
 
 import (
 	"fmt"
-	"os"
 	"strings"
 	"task/db"
+	"task/helpers"
 
 	"github.com/spf13/cobra"
 )
@@ -25,13 +25,9 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		task := strings.Join(args, " ")
-		id, err := db.CreateTask(task)
-		if err != nil {
-			fmt.Println("There was an error adding your task: ", task)
-			fmt.Println(err.Error())
-			os.Exit(1)
-		}
-		fmt.Printf("Added: '%s' to your task list with id: %d\n", task, id)
+		_, err := db.CreateTask(task)
+		helpers.Must(err, fmt.Sprintf("There was an error adding your task: '%s'", task))
+		fmt.Printf("Added: '%s' to your task list\n", task)
 	},
 }
 
